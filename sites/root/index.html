@@ -204,6 +204,8 @@
     </style>
 </head>
 <body>
+    <script src="/root/static/script.js"></script>
+    
     <div id="desktop">
         <div id="menubar">
             <div class="dropdown" id="logo-dropdown">
@@ -240,6 +242,7 @@
                     <a href="#" onclick="openWindow('help');">About Help</a>
                 </div>
             </div>
+            <p id="time" style="position: absolute; display: inline-block; right: 10px; top: -7px;" class="time">1:11 PM</p>
         </div>
         
         <div class="icon-bar">
@@ -265,7 +268,6 @@
             </div>
         </div>
     </div>
-    
-    <script src="/root/static/script.js"></script>
+    <script>onStart();</script>
 </body>
 </html>

@@ -1,3 +1,72 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms)); //i love js
+}
+
+async function hideEverything() {
+    var menubar = document.getElementById("menubar")
+    var iconbar = document.getElementsByClassName("icon-bar")[0];
+    var time = document.getElementById("time");
+    time.style.display = "none";
+    menubar.style.display = "none";
+    iconbar.style.display = "none";
+    await sleep(200);
+    
+    //
+    menubar.style.display = "block";
+
+    //
+    var elements = menubar.getElementsByTagName("*");
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].tagName == "DIV" && elements[i].className == "dropdown") {
+            elements[i].style.display = "none";
+        }
+    }
+    var elements = iconbar.getElementsByTagName("*");
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].tagName == "DIV" && elements[i].className != "icon-text") {
+            elements[i].style.display = "none";
+        }
+    }
+
+    //
+    var elements = menubar.getElementsByTagName("*");
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].tagName == "DIV" && elements[i].className == "dropdown") {
+            await sleep(100);
+            elements[i].style.display = "inline-block";
+        }
+    }
+
+    //
+    await sleep(200);
+    iconbar.style.display = "block";
+
+    var elements = iconbar.getElementsByTagName("*");
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].tagName == "DIV" && elements[i].className != "dropdown") {
+            await sleep(100);
+            elements[i].style.display = "flex";
+        }
+    }
+}
+
+function updateTime() {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString(); // Format time as HH:MM:SS
+    document.getElementById("time").textContent = formattedTime;
+}
+
+async function onStart() {
+    await hideEverything();
+    await sleep(200);
+    updateTime();
+    setInterval(updateTime, 1000);
+    document.getElementById("time").style.display = "inline-block";
+    await sleep(1000);
+    openWindow("Macintosh HD");
+    
+}
+
 var called = false;
 
 const currentPath = window. location. href;
@@ -323,3 +392,4 @@ document.addEventListener('mousedown', function(e) {
     }
 }*/ // this would be used if I could be assed to make dropdown an onclick with fancy javascript
 // leave for last, not really needed. Get core functionality working first.
+// nope, not doing it.
